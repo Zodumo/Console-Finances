@@ -107,45 +107,81 @@ console.log("The net total amount of profit/losses: " + total);
 
 // // The average of the changes in Profit/Losses over the entire period:
 // // calculate each change by subtracting the previous month from this month
-var differences = []
-var wins = []
-var losses = []
 
 
-for (var i = 0; i < finances.length; i++) {
+// Declaring the variables and setting their current values as empty arrays.
+var differences = [] 
+var wins = [] //increases 
+var losses = [] //decreases
 
-    var b = i + 1
-    console.log(b)
-    if (b == finances.length) break;
+// Beginning of for loop that calculates the changes.
+for (var i = 1; i < finances.length; i++) {
 
-    var changes = finances[i][1] - finances[b][1];
-    console.log("The change between " + finances[i][1] + "and " + finances[b][1]+ " is " + changes);
-    differences.push(changes)
+    //varibale to hold every difference
+    var changes;
 
-    if (changes >= 0) {
-        wins.push(changes);
-    } else if (changes <= 0) {
-        losses.push(changes);
-    }
-}
+    //variable to hold the previous month
+    var b = i - 1;
+
+    // ensuring that the loop breaks once the program has iterated through the whole finances array
+    if (i == finances.length) break;
+
+    //calculating the difference by subtracting the previous month's value from the current month
+    changes = finances[i][1] - finances[b][1];
+
+    //append the calculated difference to the differences array
+    differences.push(changes, finances[i][0]);
+
+    //statement to ensure that if the previous month's value is greater than that of the current month, append to losses, else append to wins
+    if (finances[b][1] > finances[i][1]) {
+        
+        losses.push(changes, finances[i][0]);
+        
+    } else if (finances[b][1] < finances[i][1]) {
+        
+        wins.push(changes,  finances[i][0]);
+    };
+};
 
 
 
 // // You will need to track what the total change in profits is from month to month and then find the average"
-// // (Total/total number of changes) ===> total change/(months - 1)
-// // maybe put all the changes into an array? using .push(...) ?
+
+var sum = 0;
+
+for(var i = 0; i < differences.length; i++) {
+
+    sum += differences[i][0];
+};
+
+// Getting the average by divinding the total by the length of the array
+var averageChanges = sum / differences.length;
+console.log("The Average changes in profits/losses is: " + averageChanges)
+
+//sorting the increases and decreases array
+wins.sort(function (x, y) {
+    return y[0] - x[0];
+});
+
+losses.sort(function (x, y) {
+    return x[0] - y[0];
+});
+//capturing the greatest increase and the first element within the first sub array
+var greatestIncrease = wins[0][0];
+
+//capturing the greatest decrease and the first element within the first sub array
+
+var greatestDecrease = losses[0][0];
+
+console.log("Financial Analysis \n---------------------------\n"+
+"Total: $" + total + "\n" +
+"Average Change: $" + averageChanges.toFixed(2) + "\n" +
+"Greatest Increase in Profits: "+ wins[0][1]+ "($"+greatestIncrease+")\n" +
+"Greatest Decrease in Profits: "+ losses[0][1]+ "($"+greatestDecrease+")"
+
+);
 
 
-
-
-// // The greatest increase in profits (date and amount) over the entire period:
-// // start with 0
-// //   check the last increase. If it's bigger than 0, keep track of the new biggest one:
-// //   in a loop
-
-
-// // The greatest decrease in losses (date and amount) over the entire period:
-// // console output format!
 
 // FINAL RESULTS SHOULD LOOK LIKE THIS: 
 // // Financial Analysis
@@ -158,35 +194,12 @@ for (var i = 0; i < finances.length; i++) {
 
 
 
-// An example of calculating the average change over the first 5 months:
-
-// var finances = [
-// ['Jan-2010', 867884], // A
-// ['Feb-2010', 984655], // B
-// ['Mar-2010', 322013], // C
-// ['Apr-2010', -69417], // D
-// ['May-2010', 310503]  // E
-// To calculate the average change, I need to
-// 1. calculate the change from month to month
-// 2.    .... for each month
-//     First change is B - A: 984655 - 867884 =  116771
-//     Next  change is C - B: 322013 - 984655 = -662642
-//     Next  change is D - C: -69417 - 322013 = -391430
-//     Next  change is E - D: 310503 - -69417 =  379920
-// 3. Add all those changes together
-// 116771 + -662642 + -391430 + 379920 = -557381
-// 4. Divide by the total number of changes I calculated
-// -557381 / 4 = -139345.25
 
 
 
 
-// OOH! How do I reference a value in a TWO-DIMENSIONAL array?
-// A two-dimensional array is an array that contains arrays. Like this:
-// var myArray = [ [ "Dan", 10 ], [ "Tucker", 42 ], [ "Hunter", 666 ], [ "Andrew", 99 ] ];
-// 6:31
-// If I use bracket notation, I can grab an individual element.
-// myArray[2] is [ "Hunter", 666 ]
+
+
 
 
 
