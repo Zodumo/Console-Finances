@@ -110,7 +110,7 @@ console.log("The net total amount of profit/losses: " + total);
 
 
 // Declaring the variables and setting their current values as empty arrays.
-var differences = [] 
+var differences = []
 var wins = [] //increases 
 var losses = [] //decreases
 
@@ -128,18 +128,17 @@ for (var i = 1; i < finances.length; i++) {
 
     //calculating the difference by subtracting the previous month's value from the current month
     changes = finances[i][1] - finances[b][1];
-
+    
     //append the calculated difference to the differences array
-    differences.push(changes, finances[i][0]);
+    differences.push([changes, finances[i][0]]);
 
     //statement to ensure that if the previous month's value is greater than that of the current month, append to losses, else append to wins
     if (finances[b][1] > finances[i][1]) {
-        
-        losses.push(changes, finances[i][0]);
-        
+
+        losses.push([changes, finances[i][0]]);
     } else if (finances[b][1] < finances[i][1]) {
-        
-        wins.push(changes,  finances[i][0]);
+
+        wins.push([changes, finances[i][0]]);
     };
 };
 
@@ -148,15 +147,15 @@ for (var i = 1; i < finances.length; i++) {
 // // You will need to track what the total change in profits is from month to month and then find the average"
 
 var sum = 0;
-
-for(var i = 0; i < differences.length; i++) {
+for (var i = 0; i < differences.length; i++) {
 
     sum += differences[i][0];
+
 };
 
-// Getting the average by divinding the total by the length of the array
+//divide the total we get by the length of the array to get the average change
 var averageChanges = sum / differences.length;
-console.log("The Average changes in profits/losses is: " + averageChanges)
+
 
 //sorting the increases and decreases array
 wins.sort(function (x, y) {
@@ -167,19 +166,20 @@ losses.sort(function (x, y) {
     return x[0] - y[0];
 });
 //capturing the greatest increase and the first element within the first sub array
-var greatestIncrease = wins[0][0];
+var greatestIncrease = wins [0][0];
 
 //capturing the greatest decrease and the first element within the first sub array
 
-var greatestDecrease = losses[0][0];
+var greatestDecrease = losses [0][0];
 
-console.log("Financial Analysis \n---------------------------\n"+
-"Total: $" + total + "\n" +
-"Average Change: $" + averageChanges.toFixed(2) + "\n" +
-"Greatest Increase in Profits: "+ wins[0][1]+ "($"+greatestIncrease+")\n" +
-"Greatest Decrease in Profits: "+ losses[0][1]+ "($"+greatestDecrease+")"
+console.log("Financial Analysis \n---------------------------\n" +
+    "Total: $" + total + "\n" +
+    "Average Change: $" + averageChanges.toFixed(2) + "\n" +
+    "Greatest Increase in Profits: " + wins[0][1] + "($" + greatestIncrease + ")\n" +
+    "Greatest Decrease in Profits: " + losses[0][1] + "($" + greatestDecrease + ")"
 
 );
+
 
 
 
