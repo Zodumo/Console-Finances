@@ -9,3 +9,27 @@ The greatest decrease in profit(i.e. loss).
 
 # Access and Usage
 
+This project has been deployed on GitHub pages and can be accessed via this link:
+
+https://zodumo.github.io/Console-Finances/ 
+
+To view the results :
+
+1. Please open the google chrome browser
+2. Righ-click on the screen, elect inspect and find the console tab.
+
+The results should look like this:
+
+```
+Financial Analysis
+ ----------------------------
+Total Months: 25
+Total: $2561231
+Average  Change: $-2315.12
+Greatest Increase in Profits: Feb-2012 ($1926159)
+Greatest Decrease in Profits: Sep-2013 ($-2196167)
+```
+
+# License
+
+N/A
